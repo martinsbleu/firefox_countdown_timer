@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Countdowns</h1>
+      <div class="sort-container">
+        <label for="sortSelect">Sort:</label>
+        <select id="sortSelect">
+          <option value="closest">Closest Target</option>
+          <option value="created">Date Created</option>
+        </select>
+      </div>
+    </header>
+
+    <form id="countdownForm">
+      <input type="text" id="titleInput" placeholder="Event title..." required autocomplete="off" />
+      <div class="input-row">
+        <input type="date" id="dateInput" required />
+        <button type="submit" id="addButton">+</button>
+      </div>
+    </form>
+
+    <main id="countdownList"></main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
