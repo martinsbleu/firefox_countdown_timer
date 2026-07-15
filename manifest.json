@@ -1,20 +1,24 @@
 {
   "manifest_version": 3,
   "name": "Minimal Countdown",
-  "version": "1.0",
+  "version": "1.1",
   "description": "A clean, minimalist countdown timer for your multiple events.",
   "permissions": ["storage"],
   "browser_specific_settings": {
     "gecko": {
-      "id": "martin.930.lyon@outlook.com"
+      "id": "minimal-countdown@yourdomain.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
+  },
+  "icons": {
+    "32": "icon.svg",
+    "48": "icon.svg",
+    "128": "icon.svg"
   },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
-    }
+    "default_icon": "icon.svg"
   }
 }
