@@ -130,16 +130,34 @@ function renderCountdowns() {
       }
     });
 
-    const dateEl = document.createElement("span");
-    dateEl.className = "card-date";
-    dateEl.textContent = new Date(item.targetDate).toLocaleDateString(undefined, {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
+    // Inline editable Date Picker Element
+    const dateInputEl = document.createElement("input");
+    dateInputEl.type = "date";
+    dateInputEl.className = "card-date-input";
+
+    // Convert targetDate timestamp to YYYY-MM-DD for standard input value
+    const dateObj = new Date(item.targetDate);
+    const yyyy = dateObj.getFullYear();
+    const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const dd = String(dateObj.getDate()).padStart(2, "0");
+    dateInputEl.value = `${yyyy}-${mm}-${dd}`;
+
+    // Handle inline date updates
+    dateInputEl.addEventListener("change", async (e) => {
+      if (!e.target.value) return;
+
+      const [year, month, day] = e.target.value.split("-").map(Number);
+      const newTargetDate = new Date(year, month - 1, day).getTime();
+
+      if (newTargetDate !== item.targetDate) {
+        item.targetDate = newTargetDate;
+        await saveToStorage();
+        renderCountdowns();
+      }
     });
 
     infoDiv.appendChild(titleEl);
-    infoDiv.appendChild(dateEl);
+    infoDiv.appendChild(dateInputEl);
 
     const timeRightDiv = document.createElement("div");
     timeRightDiv.style.display = "flex";
